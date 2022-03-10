@@ -1,0 +1,30 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-size: 1rem;
+	font-weight: normal;
+}
+
+html {
+	--bg-main: white;
+	--bg-off: #f9f9fb;
+
+	--interaction-indication: black;
+
+	@media (prefers-color-scheme: dark) {
+		color: white;
+
+		--bg-main: #15131b;
+		--bg-off: #23222b;
+
+		--interaction-indication: white;
+	}
+	body {
+		background: var(--bg-main);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-top: 20px;
+	}
+}

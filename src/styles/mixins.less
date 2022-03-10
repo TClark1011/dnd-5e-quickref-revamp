@@ -1,0 +1,12 @@
+.size(@size) {
+	width: @size;
+	height: @size;
+}
+
+.outline(@size, @color) {
+	box-shadow: 0 @size 0 0 @color; /* Border bottom */
+	box-shadow: 0 -@size 0 0 @color; /* Border top */
+	box-shadow: -@size 0 0 0 @color; /* Border left */
+	box-shadow: @size 0 0 0 @color; /* Border right */
+	box-shadow: 0 0 0 @size @color; /* All the borders by using the spread properties */
+}
