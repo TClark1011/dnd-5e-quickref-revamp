@@ -20,21 +20,23 @@
 </div>
 
 <style lang="less">
+	@import '../styles/index.less';
 	.root {
-		border: 3px solid var(--section-color);
-		width: 700px;
-		border-radius: 8px;
-		background: var(--bg-off);
+		@contentPadding: @spacing * 2;
 
-		@contentPadding: 16px;
+		border: 6px solid var(--section-color);
+		width: 700px;
+		border-radius: @radius[lg];
+		background: @colors[ @bg][off];
 
 		.title {
 			color: white;
 			background-color: var(--section-color);
-			padding: 8px @contentPadding;
+
+			padding: @spacing * 2 @contentPadding;
 
 			h2 {
-				font-size: 1.4rem;
+				font-size: @fontSize[xl];
 				font-weight: bold;
 			}
 		}

@@ -1,11 +1,19 @@
 <script lang="ts">
+	import { onInteraction } from '../actions';
+
 	import type { RuleItem } from '../types';
+	import Modal from './Modal.svelte';
 
 	export let data: RuleItem;
-	let { title, subtitle } = data;
+	let { title, subtitle, bullets } = data;
+
+	let modalIsOpen = false;
+	const toggleModal = () => {
+		modalIsOpen = !modalIsOpen;
+	};
 </script>
 
-<div class="root" on:click={() => alert(title)}>
+<div class="root" use:onInteraction={toggleModal} tabIndex="0">
 	<svg
 		x="0px"
 		y="0px"
@@ -162,41 +170,55 @@
 	</div>
 </div>
 
+<Modal bind:isOpen={modalIsOpen} {title} {subtitle}>
+	<!-- <ul>
+		{#each bullets as bullet}
+			<li>{bullet}</li>
+		{/each}
+	</ul> -->
+	{#each bullets as bullet}
+		<p class="bullet">{@html bullet}</p>
+	{/each}
+</Modal>
+
 <style lang="less">
-	@import '../styles/mixins.less';
+	@import '../styles/index.less';
 
 	.root {
+		@gutter: @spacing;
+		@contentLineHeight: 1.2rem;
+		@rounding: @radius[md];
+
 		display: flex;
 		gap: 4px;
 		cursor: pointer;
-
-		border-radius: 8px;
-
-		@gutter: 8px;
+		border-radius: @rounding;
 		padding: @gutter;
+		.offsetColumnGutter(3, @gutter);
 
-		&:hover {
-			background: var(--bg-main);
-		}
-		&:nth-child(3) {
-			margin-right: -@gutter;
-		}
-		&:nth-child(3n + 1) {
-			margin-left: -@gutter;
-		}
-
-		@contentLineHeight: 1.2rem;
+		.active({
+			background: @colors[ @bg][main];
+		});
 
 		.icon {
+			border-radius: @radius[sm];
 			background: green;
-
 			.size(@contentLineHeight * 2);
 		}
 
 		.text {
+			h3 {
+				font-weight: bold;
+			}
 			* {
 				line-height: @contentLineHeight;
 			}
 		}
+	}
+
+	.bullet {
+		.axisProp(padding, y, @spacing * 2);
+		border-top: 1px solid @colors[text];
+		line-height: 1.4rem;
 	}
 </style>

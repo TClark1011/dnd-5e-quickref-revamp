@@ -3,10 +3,48 @@
 	height: @size;
 }
 
-.outline(@size, @color) {
-	box-shadow: 0 @size 0 0 @color; /* Border bottom */
-	box-shadow: 0 -@size 0 0 @color; /* Border top */
-	box-shadow: -@size 0 0 0 @color; /* Border left */
-	box-shadow: @size 0 0 0 @color; /* Border right */
-	box-shadow: 0 0 0 @size @color; /* All the borders by using the spread properties */
+.axisProp(@property, @direction, @amount) {
+	& when (@direction = x) {
+		@{property}-left: @amount;
+		@{property}-right: @amount;
+	}
+	& when (@direction = y) {
+		@{property}-top: @amount;
+		@{property}-bottom: @amount;
+	}
+}
+
+.noLayoutBorder(@size, @color) {
+	box-shadow: 0 0 0 @size @color;
+}
+
+.offsetColumnGutter(@columns, @size) {
+	&:nth-child(@{columns}) {
+		margin-right: -@size;
+	}
+
+	@leftSideSelector: ~'@{columns}n+1';
+	&:nth-child(@{leftSideSelector}) {
+		margin-left: -@size;
+	}
+}
+
+.inset(@position) {
+	left: @position;
+	right: @position;
+	top: @position;
+	bottom: @position;
+}
+
+.darkMode(@rules) {
+	@media (prefers-color-scheme: dark) {
+		@rules();
+	}
+}
+
+.active(@rules) {
+	&:focus,
+	&:hover {
+		@rules();
+	}
 }

@@ -1,3 +1,5 @@
+@import './index.less';
+
 * {
 	margin: 0;
 	padding: 0;
@@ -7,24 +9,27 @@
 }
 
 html {
-	--bg-main: white;
-	--bg-off: #f9f9fb;
+	--bg-main: #f7f7f7;
+	--bg-off: white;
+	--text: black;
 
-	--interaction-indication: black;
-
-	@media (prefers-color-scheme: dark) {
-		color: white;
+	.darkMode({
 
 		--bg-main: #15131b;
 		--bg-off: #23222b;
+		--text: white;
+	});
 
-		--interaction-indication: white;
-	}
+	color: @colors[text];
+	font-family: @fonts[body];
+
 	body {
 		background: var(--bg-main);
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		margin-top: 20px;
+
+		min-height: 100vh;
+		min-width: 100vw;
 	}
 }

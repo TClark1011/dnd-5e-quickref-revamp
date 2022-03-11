@@ -16,8 +16,15 @@
 </div>
 
 <style lang="less">
-	.items {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
+	@import '../styles/index.less';
+	.root {
+		.description {
+			margin-bottom: @spacing;
+		}
+		.items {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: @spacing;
+		}
 	}
 </style>
