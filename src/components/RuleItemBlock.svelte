@@ -96,6 +96,12 @@
 		@media print {
 			display: none;
 		}
+
+		&.modal {
+			#lightMode({
+				background: black !important;
+			});
+		}
 	}
 
 	#tinted() {

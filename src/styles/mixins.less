@@ -41,6 +41,11 @@
 		@rules();
 	}
 }
+#lightMode(@rules) {
+	@media (prefers-color-scheme: light) {
+		@rules();
+	}
+}
 
 #active(@rules) {
 	&:focus,
