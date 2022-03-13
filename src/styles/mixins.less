@@ -48,6 +48,11 @@
 		@rules();
 	}
 }
+#clicked(@rules) {
+	&:hover:focus {
+		@rules();
+	}
+}
 
 #simpleGrid(@columns, @gap: 0) {
 	display: grid;

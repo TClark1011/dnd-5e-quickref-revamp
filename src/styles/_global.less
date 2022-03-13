@@ -6,6 +6,28 @@
 	box-sizing: border-box;
 	font-size: 1rem;
 	font-weight: normal;
+	background: none;
+	border: none;
+}
+
+button {
+	cursor: pointer;
+	font-weight: bold;
+	color: @colors[text];
+	padding: @spacing @spacing*2;
+	border-radius: @radius[base];
+
+	#active({
+		#tintedBackground(0.1);
+		#darkMode({
+			#tintedBackground(0.2);
+		});
+	});
+
+	&:active {
+		background-color: @colors[text];
+		color: @colors[ @bg][main];
+	}
 }
 
 html {

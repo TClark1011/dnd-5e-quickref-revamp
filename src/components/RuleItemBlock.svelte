@@ -32,13 +32,17 @@
 	{#each bullets as bullet}
 		<p class="bullet">{@html bullet}</p>
 	{/each}
-	{#if reference}
-		<div class="reference">{reference}</div>
-	{/if}
+	<div class="footer">
+		<button class="close" use:onInteraction={toggleModal}>Close</button>
+		{#if reference}
+			<div class="reference">{reference}</div>
+		{/if}
+	</div>
 </Modal>
 
 <style lang="less">
 	@import '../styles/index.less';
+
 	@contentLineHeight: 1.2rem;
 
 	.root {
@@ -94,12 +98,16 @@
 		}
 	}
 
-	.icon.modal,
-	.description {
+	#tinted() {
 		#tintedBackground(0.1);
 		#darkMode({
 			#tintedBackground(0.2);
 		});
+	}
+
+	.icon.modal,
+	.description {
+		#tinted();
 	}
 
 	//# Modal Contents
@@ -123,11 +131,14 @@
 		}
 	}
 
-	.reference {
+	.footer {
 		border-top: @border;
-		display: flex;
-		justify-content: flex-end;
 		padding-top: @padding;
-		font-style: italic;
+		display: flex;
+		justify-content: space-between;
+
+		.reference {
+			font-style: italic;
+		}
 	}
 </style>

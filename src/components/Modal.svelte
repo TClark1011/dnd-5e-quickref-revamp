@@ -9,6 +9,8 @@
 	export let isOpen: boolean;
 	export let title: string;
 	export let subtitle: string | undefined = undefined;
+
+	let bodyRef: HTMLElement;
 </script>
 
 <Dialog
@@ -17,9 +19,10 @@
 		isOpen = false;
 	}}
 	class="Modal__modal"
+	initialFocus={bodyRef}
 >
 	<DialogOverlay class="overlay" />
-	<div class="body">
+	<div class="body" bind:this={bodyRef}>
 		<div class="head">
 			<div class="text">
 				<DialogTitle class="title">{title}</DialogTitle>
