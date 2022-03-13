@@ -41,7 +41,7 @@
 		@sectionColor: var(--section-color);
 		@rounding: @radius[lg];
 
-		width: 700px;
+		width: 100%;
 		border-radius: @rounding;
 		background: @colors[ @bg][off];
 		overflow: hidden;
