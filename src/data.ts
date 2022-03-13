@@ -4,7 +4,7 @@ const data: RuleSection[] = [
 	{
 		title: 'reaction',
 		extraText: 'max. 1/round',
-		color: '#F40104',
+		color: '#FE5D01',
 		subSections: [
 			{
 				description:
@@ -53,7 +53,7 @@ const data: RuleSection[] = [
 	{
 		title: 'movement',
 		extraText: 'limited by movement speed',
-		color: '#3F53D6',
+		color: '#2995FF',
 		subSections: [
 			{
 				description:
@@ -179,7 +179,7 @@ const data: RuleSection[] = [
 		]
 	},
 	{
-		title: 'Environmental Effects',
+		title: 'environmental effects',
 		color: '#27A328',
 		subSections: [
 			{
@@ -335,7 +335,7 @@ const data: RuleSection[] = [
 	},
 	{
 		title: 'condition',
-		color: '#FFC400',
+		color: '#FEB420',
 		subSections: [
 			{
 				description:
@@ -585,7 +585,7 @@ const data: RuleSection[] = [
 	},
 	{
 		title: 'action',
-		color: '#FF5D00',
+		color: '#F40104',
 		extraText: '1/round',
 		subSections: [
 			{

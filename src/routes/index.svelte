@@ -5,9 +5,12 @@
 <script lang="ts">
 	import { RuleSectionCard } from '../components';
 	import data from '../data';
+	import { sortData } from '../logic';
+
+	$: sortedData = sortData(data);
 </script>
 
-{#each data as section}
+{#each sortedData as section}
 	<div class="item">
 		<RuleSectionCard data={section} />
 	</div>
