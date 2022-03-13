@@ -23,7 +23,12 @@
 		tabIndex="0"
 	>
 		<h2>{titleCase(title)}</h2>
-		<span class:collapsed={$collapsedState} class="arrow">{'<'}</span>
+		<img
+			src={'icons/chevron-down.svg'}
+			alt="arrow"
+			class="arrow"
+			class:collapsed={$collapsedState}
+		/>
 	</div>
 	{#if !$collapsedState}
 		<div class="body" transition:slide={{ duration: 300 }}>
@@ -43,19 +48,22 @@
 
 		width: 100%;
 		border-radius: @rounding;
-		background: @colors[ @bg][off];
+		background-color: @sectionColor;
 		overflow: hidden;
 		box-shadow: @boxShadows[base];
 
 		.title {
 			color: white;
-			background-color: @sectionColor;
 			padding: @spacing * 2 @contentPadding;
 			transition: border-radius 300ms linear;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
 			cursor: pointer;
+
+			#active({
+				#tintedBackground(0.2);
+			});
 
 			@media print {
 				color: black;
@@ -68,7 +76,7 @@
 			}
 
 			.arrow {
-				transform: rotateZ(-90deg);
+				transform: rotateZ(0deg);
 				transition: transform 300ms linear;
 
 				@media print {
@@ -76,7 +84,7 @@
 				}
 
 				&.collapsed {
-					transform: rotateZ(0);
+					transform: rotateZ(90deg);
 				}
 			}
 
@@ -89,6 +97,7 @@
 
 		.body {
 			padding: @contentPadding;
+			background: @colors[ @bg][off];
 		}
 	}
 </style>
