@@ -21,5 +21,41 @@
 	<meta property="og:image" content="thumbnail.png" />
 </svelte:head>
 <div id="root">
+	<div id="force-center" class="offset" />
 	<slot />
+	<footer class="offset">
+		<p>
+			<span>Thanks to </span><a href="https://github.com/crobi">crobi</a> for the
+			<a href="https://crobi.github.io/dnd5e-quickref/preview/quickref.html">original</a>
+		</p>
+	</footer>
 </div>
+
+<style lang="less">
+	@import '../styles/index.less';
+
+	#root {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		min-height: 100vh;
+
+		.offset {
+			height: 4rem;
+		}
+
+		#force-center {
+			@media print {
+				display: none;
+			}
+			#phone({
+				display: none;
+			});
+		}
+
+		footer {
+			text-align: center;
+			#flexCenter();
+		}
+	}
+</style>

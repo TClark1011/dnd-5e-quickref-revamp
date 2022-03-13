@@ -46,19 +46,6 @@ html {
 
 	body {
 		background: @colors[ @bg][main];
-		display: flex;
-		align-items: center;
-		justify-content: center;
-
-		#phone({
-			align-items: flex-start;
-		});
-
-		@media print {
-			align-items: flex-start;
-			padding-top: @spacing;
-		}
-
-		min-height: 100vh;
+		#flexCenter();
 	}
 }
