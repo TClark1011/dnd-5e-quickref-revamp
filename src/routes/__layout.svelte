@@ -26,7 +26,8 @@
 	<footer class="offset">
 		<p>
 			<span>Thanks to </span><a href="https://github.com/crobi">crobi</a> for the
-			<a href="https://crobi.github.io/dnd5e-quickref/preview/quickref.html">original</a>
+			<a href="https://crobi.github.io/dnd5e-quickref/preview/quickref.html">original</a> | icons
+			from <a href="https://game-icons.net/">game-icons</a>
 		</p>
 	</footer>
 </div>
