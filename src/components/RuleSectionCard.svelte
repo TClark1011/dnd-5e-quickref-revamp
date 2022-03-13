@@ -5,22 +5,27 @@
 	import { onInteraction } from '../actions';
 	import type { RuleSection } from '../types';
 	import { kebabCase, titleCase } from '../utils';
+	import { B } from '@mobily/ts-belt';
+	import { writable } from 'svelte-local-storage-store';
 
 	export let data: RuleSection;
 	let { title, subSections } = data;
 
-	let collapsed = false;
-	const toggleCollapsed = () => {
-		collapsed = !collapsed;
-	};
+	let collapsedState = writable(`${title}-collapsed`, false);
+	const toggleCollapsed = () => collapsedState.update(B.not);
 </script>
 
 <div class="root" style="--section-color: var(--section-color-{kebabCase(title)})">
-	<div class="title" use:onInteraction={toggleCollapsed} class:collapsed tabIndex="0">
+	<div
+		class="title"
+		use:onInteraction={toggleCollapsed}
+		class:collapsed={$collapsedState}
+		tabIndex="0"
+	>
 		<h2>{titleCase(title)}</h2>
-		<span class:collapsed class="arrow">{'<'}</span>
+		<span class:collapsed={$collapsedState} class="arrow">{'<'}</span>
 	</div>
-	{#if !collapsed}
+	{#if !$collapsedState}
 		<div class="body" transition:slide={{ duration: 300 }}>
 			{#each subSections as subSection}
 				<RuleSubSectionBlock data={subSection} />
