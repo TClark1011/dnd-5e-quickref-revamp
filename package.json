@@ -30,7 +30,9 @@
   },
   "type": "module",
   "dependencies": {
+    "@mobily/ts-belt": "^3.9.1",
     "@rgossiaux/svelte-headlessui": "^1.0.0-beta.12",
-    "less": "^4.1.2"
+    "less": "^4.1.2",
+    "polished": "^4.1.4"
   }
 }

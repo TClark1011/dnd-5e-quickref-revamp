@@ -22,9 +22,12 @@
 			margin-bottom: @spacing;
 		}
 		.items {
-			display: grid;
-			grid-template-columns: repeat(3, 1fr);
-			gap: @spacing;
+			--columns: 3;
+			#simpleGrid(var(--columns), @spacing);
+
+			@media print {
+				--columns: 4;
+			}
 		}
 	}
 </style>

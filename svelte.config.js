@@ -16,9 +16,10 @@ const config = {
 
 	kit: {
 		adapter: adapter(),
-		vite: {},
-		paths: {
-			assets: 'src/assets'
+		vite: {
+			ssr: {
+				noExternal: ['@mobily/ts-belt']
+			}
 		}
 	}
 };

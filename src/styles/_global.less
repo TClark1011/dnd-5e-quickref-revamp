@@ -13,8 +13,7 @@ html {
 	--bg-off: white;
 	--text: black;
 
-	.darkMode({
-
+	#darkMode({
 		--bg-main: #15131b;
 		--bg-off: #23222b;
 		--text: white;
@@ -24,10 +23,15 @@ html {
 	font-family: @fonts[body];
 
 	body {
-		background: var(--bg-main);
+		background: @colors[ @bg][main];
 		display: flex;
 		align-items: center;
 		justify-content: center;
+
+		@media print {
+			align-items: flex-start;
+			padding-top: @spacing;
+		}
 
 		min-height: 100vh;
 		min-width: 100vw;

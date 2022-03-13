@@ -35,7 +35,7 @@
 
 	:global(.modal) {
 		position: fixed;
-		.inset(0);
+		#inset(0);
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -43,7 +43,7 @@
 
 		:global(.overlay) {
 			position: fixed;
-			.inset(0);
+			#inset(0);
 			background: black;
 			opacity: 0.3;
 		}
@@ -53,7 +53,7 @@
 			width: 400px;
 			position: relative;
 			border-radius: @radius[xl];
-			.axisProp(margin, x, auto);
+			#axisProp(margin, x, auto);
 			padding: @spacing * 2;
 			background: @colors[ @bg][off];
 
