@@ -60,6 +60,8 @@
 			padding: @spacing * 2;
 			background: @colors[ @bg][off];
 			box-shadow: @boxShadows[high];
+			overflow: auto;
+			max-height: 100vh;
 
 			.head {
 				margin-bottom: @spacing * 2;
