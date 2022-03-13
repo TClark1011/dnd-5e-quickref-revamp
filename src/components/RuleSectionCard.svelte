@@ -15,17 +15,15 @@
 	const toggleCollapsed = () => collapsedState.update(B.not);
 </script>
 
-<div
-	id={title}
-	class="root"
-	role="button"
-	style="--section-color: var(--section-color-{kebabCase(title)})"
->
+<div id={title} class="root" style="--section-color: var(--section-color-{kebabCase(title)})">
 	<div
+		role="button"
 		class="title"
 		use:onInteraction={toggleCollapsed}
 		class:collapsed={$collapsedState}
 		tabIndex="0"
+		aria-controls={title}
+		aria-expanded={!$collapsedState}
 	>
 		<h2>{titleCase(title)}</h2>
 		<img
@@ -36,7 +34,7 @@
 		/>
 	</div>
 	{#if !$collapsedState}
-		<div class="body" transition:slide={{ duration: 300 }}>
+		<div class="body" transition:slide={{ duration: 300 }} role="region" aria-labelledby={title}>
 			{#each subSections as subSection}
 				<RuleSubSectionBlock data={subSection} />
 			{/each}
