@@ -15,7 +15,12 @@
 	const toggleCollapsed = () => collapsedState.update(B.not);
 </script>
 
-<div class="root" style="--section-color: var(--section-color-{kebabCase(title)})">
+<div
+	id={title}
+	class="root"
+	role="button"
+	style="--section-color: var(--section-color-{kebabCase(title)})"
+>
 	<div
 		class="title"
 		use:onInteraction={toggleCollapsed}
