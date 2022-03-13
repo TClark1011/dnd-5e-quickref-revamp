@@ -1,18 +1,21 @@
 <script lang="ts">
 	import { onInteraction } from '../actions';
-
 	import type { RuleItem } from '../types';
+	import { compareStrings } from '../utils';
 	import Modal from './Modal.svelte';
 
 	export let data: RuleItem;
 	let { title, subtitle, bullets, icon, reference, description } = data;
 
 	let modalIsOpen = false;
+
 	const toggleModal = () => {
 		modalIsOpen = !modalIsOpen;
 	};
 
+	//# Derived values
 	const iconSrc = `icons/${icon}.svg`;
+	const descriptionSubtitleDiff = compareStrings(subtitle, description, { caseSensitive: false });
 </script>
 
 <div class="root" use:onInteraction={toggleModal} tabIndex="0">
@@ -28,7 +31,9 @@
 
 <Modal bind:isOpen={modalIsOpen} {title} {subtitle}>
 	<img src={iconSrc} alt={icon} class="icon modal" slot="icon" />
-	<p class="description">{description}</p>
+	{#if descriptionSubtitleDiff > 5}
+		<p class="description">{description}</p>
+	{/if}
 	{#each bullets as bullet}
 		<p class="bullet">{@html bullet}</p>
 	{/each}
