@@ -28,6 +28,10 @@
 			@media print {
 				--columns: 4;
 			}
+
+			#phone({
+				--columns: 2;
+			});
 		}
 	}
 </style>

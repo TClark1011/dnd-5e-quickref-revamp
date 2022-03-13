@@ -53,7 +53,12 @@
 		position: relative;
 
 		@media screen {
-			#offsetColumnGutter(3, @gutter);
+			#desktop({
+				#offsetColumnGutter(3, @gutter);
+			});
+			#phone({
+				#offsetColumnGutter(2, @gutter);
+			});
 		}
 		@media print {
 			#offsetColumnGutter(4, @gutter);
