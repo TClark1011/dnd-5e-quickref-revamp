@@ -94,8 +94,12 @@
 		margin-bottom: @padding;
 		// font-style: italic;
 		padding: @spacing;
-		#tintedBackground(0.2);
+		#tintedBackground(0.1);
 		border-radius: @radius[md];
+
+		#darkMode({
+			#tintedBackground(0.2);
+		});
 	}
 
 	.bullet {

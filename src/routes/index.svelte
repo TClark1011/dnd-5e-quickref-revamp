@@ -15,7 +15,7 @@
 
 <style lang="less">
 	@import '../styles/index.less';
-	.item + .item {
-		margin-top: @spacing * 2;
+	.item {
+		#stack(y, @spacing * 2);
 	}
 </style>

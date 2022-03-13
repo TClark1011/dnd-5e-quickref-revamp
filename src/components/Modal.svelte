@@ -56,6 +56,7 @@
 			#axisProp(margin, x, auto);
 			padding: @spacing * 2;
 			background: @colors[ @bg][off];
+			box-shadow: @boxShadows[high];
 
 			.head {
 				margin-bottom: @spacing * 2;

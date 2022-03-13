@@ -58,3 +58,16 @@
 #tintedBackground(@opacity) {
 	background-color: rgba(0, 0, 0, @opacity);
 }
+
+#stack(@direction, @amount, @property: margin) {
+	& when (@direction = y) {
+		&:not(:last-child) {
+			@{property}-bottom: @amount;
+		}
+	}
+	& when (@direction = x) {
+		&:not(:last-child) {
+			@{property}-right: @amount;
+		}
+	}
+}

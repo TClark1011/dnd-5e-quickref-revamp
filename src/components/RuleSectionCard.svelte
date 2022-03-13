@@ -4,7 +4,7 @@
 	import { RuleSubSectionBlock } from '.';
 	import { onInteraction } from '../actions';
 	import type { RuleSection } from '../types';
-	import { titleCase } from '../utils';
+	import { kebabCase, titleCase } from '../utils';
 
 	export let data: RuleSection;
 	let { title, subSections } = data;
@@ -15,7 +15,7 @@
 	};
 </script>
 
-<div class="root" style="--section-color: var(--section-color-{title})">
+<div class="root" style="--section-color: var(--section-color-{kebabCase(title)})">
 	<div class="title" use:onInteraction={toggleCollapsed} class:collapsed tabIndex="0">
 		<h2>{titleCase(title)}</h2>
 		<span class:collapsed class="arrow">{'<'}</span>

@@ -6,6 +6,7 @@
 	import { D, pipe, A } from '@mobily/ts-belt';
 	import {
 		convertObjectToCssStyles,
+		kebabCase,
 		wrapCssStringWithDarkModePref,
 		wrapWithStyleTags
 	} from '../utils';
@@ -13,6 +14,7 @@
 
 	const colorVariablesObject = pipe(
 		data,
+		A.map(D.update('title', kebabCase)),
 		A.map(({ color, title }) => ({ [`--section-color-${title}`]: color })),
 		A.reduce({}, D.merge)
 	);

@@ -14,7 +14,7 @@ export type RuleSubSection = {
 
 export type RuleSection = {
 	title: string;
-	extraText: string;
+	extraText?: string;
 	subSections: RuleSubSection[];
 	color: string;
 };
