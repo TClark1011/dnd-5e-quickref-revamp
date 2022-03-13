@@ -136,6 +136,7 @@
 		padding-top: @padding;
 		display: flex;
 		justify-content: space-between;
+		align-items: center;
 
 		.reference {
 			font-style: italic;
