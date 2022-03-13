@@ -11,11 +11,13 @@
 	const toggleModal = () => {
 		modalIsOpen = !modalIsOpen;
 	};
+
+	const iconSrc = `icons/${icon}.svg`;
 </script>
 
 <div class="root" use:onInteraction={toggleModal} tabIndex="0">
 	<!-- <div class="darken" /> -->
-	<img src={`icons/${icon}.svg`} alt={icon} class="icon" />
+	<img src={iconSrc} alt={icon} class="icon" />
 	<div class="text">
 		<h3>{title}</h3>
 		<p class="subtitle">
@@ -25,6 +27,7 @@
 </div>
 
 <Modal bind:isOpen={modalIsOpen} {title} {subtitle}>
+	<img src={iconSrc} alt={icon} class="icon modal" slot="icon" />
 	<p class="description">{description}</p>
 	{#each bullets as bullet}
 		<p class="bullet">{@html bullet}</p>
@@ -36,10 +39,10 @@
 
 <style lang="less">
 	@import '../styles/index.less';
+	@contentLineHeight: 1.2rem;
 
 	.root {
 		@gutter: @spacing;
-		@contentLineHeight: 1.2rem;
 		@rounding: @radius[md];
 
 		display: flex;
@@ -65,17 +68,6 @@
 			});
 		});
 
-		.icon {
-			border-radius: @radius[md];
-			background: black;
-			#size(@contentLineHeight * 2);
-			padding: @spacing * 0.5;
-
-			@media print {
-				display: none;
-			}
-		}
-
 		.text {
 			h3 {
 				font-weight: bold;
@@ -86,6 +78,25 @@
 		}
 	}
 
+	.icon {
+		border-radius: @radius[md];
+		background: black;
+		#size(@contentLineHeight * 2);
+		padding: @spacing * 0.5;
+
+		@media print {
+			display: none;
+		}
+	}
+
+	.icon.modal,
+	.description {
+		#tintedBackground(0.1);
+		#darkMode({
+			#tintedBackground(0.2);
+		});
+	}
+
 	//# Modal Contents
 	@border: 1px solid @colors[text];
 	@padding: @spacing * 2;
@@ -94,12 +105,7 @@
 		margin-bottom: @padding;
 		// font-style: italic;
 		padding: @spacing;
-		#tintedBackground(0.1);
 		border-radius: @radius[md];
-
-		#darkMode({
-			#tintedBackground(0.2);
-		});
 	}
 
 	.bullet {

@@ -16,15 +16,18 @@
 	on:close={() => {
 		isOpen = false;
 	}}
-	class="modal"
+	class="Modal__modal"
 >
 	<DialogOverlay class="overlay" />
 	<div class="body">
 		<div class="head">
-			<DialogTitle class="title">{title}</DialogTitle>
-			{#if subtitle}
-				<DialogDescription class="description">{subtitle}</DialogDescription>
-			{/if}
+			<div class="text">
+				<DialogTitle class="title">{title}</DialogTitle>
+				{#if subtitle}
+					<DialogDescription class="description">{subtitle}</DialogDescription>
+				{/if}
+			</div>
+			<slot name="icon" />
 		</div>
 		<slot />
 	</div>
@@ -33,7 +36,7 @@
 <style lang="less">
 	@import '../styles/index.less';
 
-	:global(.modal) {
+	:global(.Modal__modal) {
 		position: fixed;
 		#inset(0);
 		display: flex;
@@ -60,6 +63,8 @@
 
 			.head {
 				margin-bottom: @spacing * 2;
+				display: flex;
+				justify-content: space-between;
 
 				:global(.title) {
 					font-weight: 600;
