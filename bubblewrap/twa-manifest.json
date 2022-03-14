@@ -1,0 +1,43 @@
+{
+  "packageId": "dnd_5e_quickref_revamp.twa",
+  "host": "dnd-5e-quickref-revamp.vercel.app",
+  "name": "5e-quick-reference-revamp",
+  "launcherName": "5e-quickref",
+  "display": "standalone",
+  "themeColor": "#15131B",
+  "navigationColor": "#000000",
+  "navigationColorDark": "#000000",
+  "navigationDividerColor": "#000000",
+  "navigationDividerColorDark": "#000000",
+  "backgroundColor": "#15131B",
+  "enableNotifications": true,
+  "startUrl": "/",
+  "iconUrl": "https://dnd-5e-quickref-revamp.vercel.app/pwa/manifest-icon-512.maskable.png",
+  "maskableIconUrl": "https://dnd-5e-quickref-revamp.vercel.app/pwa/manifest-icon-512.maskable.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "/Users/thomasclark/Documents/Code/dnd-5e-quickref-revamp/bubblewrap/android.keystore",
+    "alias": "android"
+  },
+  "appVersionName": "1",
+  "appVersionCode": 1,
+  "shortcuts": [],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://dnd-5e-quickref-revamp.vercel.app/manifest.json",
+  "fallbackType": "customtabs",
+  "features": {
+    "playBilling": {
+      "enabled": true
+    }
+  },
+  "alphaDependencies": {
+    "enabled": true
+  },
+  "enableSiteSettingsShortcut": true,
+  "isChromeOSOnly": false,
+  "orientation": "portrait",
+  "fingerprints": [],
+  "additionalTrustedOrigins": [],
+  "retainedBundles": [],
+  "appVersion": "1"
+}
