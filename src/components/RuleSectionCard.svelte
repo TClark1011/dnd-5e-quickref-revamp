@@ -1,3 +1,5 @@
+<svelte:options immutable={false} />
+
 <script lang="ts">
 	import { slide } from 'svelte/transition';
 
@@ -5,35 +7,52 @@
 	import { onInteraction } from '../actions';
 	import type { RuleSection } from '../types';
 	import { kebabCase, titleCase } from '../utils';
-	import { B } from '@mobily/ts-belt';
-	import { writable } from 'svelte-local-storage-store';
+	import { A, B, F } from '@mobily/ts-belt';
+	import { writable as localStorageWritable } from 'svelte-local-storage-store';
+	import searchStore, { createVisibleSubSectionsCounterStore } from '../store/searchStore';
+	import { derived } from 'svelte/store';
 
 	export let data: RuleSection;
 	let { title, subSections } = data;
 
-	let collapsedState = writable(`${title}-collapsed`, false);
+	const collapsedState = localStorageWritable(`${title}-collapsed`, false);
+	const visibleSubSectionsStore = createVisibleSubSectionsCounterStore(subSections);
+
 	const toggleCollapsed = () => collapsedState.update(B.not);
+
+	const finalCollapsedStore = derived(
+		[searchStore, visibleSubSectionsStore, collapsedState],
+		([search, visibleSubSections, collapsed]) => {
+			const forcedOpen = !!search && !!visibleSubSections;
+			return collapsed && !forcedOpen;
+		}
+	);
 </script>
 
-<div id={title} class="root" style="--section-color: var(--section-color-{kebabCase(title)})">
+<div
+	id={title}
+	class="root"
+	hidden={!$visibleSubSectionsStore}
+	style="--section-color: var(--section-color-{kebabCase(title)})"
+>
 	<div
 		role="button"
 		class="title"
 		use:onInteraction={toggleCollapsed}
-		class:collapsed={$collapsedState}
+		class:collapsed={$finalCollapsedStore}
 		tabIndex="0"
 		aria-controls={title}
-		aria-expanded={!$collapsedState}
+		aria-expanded={!$finalCollapsedStore}
 	>
 		<h2>{titleCase(title)}</h2>
 		<img
 			src={'icons/chevron-down.svg'}
 			alt="arrow"
 			class="arrow"
-			class:collapsed={$collapsedState}
+			class:collapsed={$finalCollapsedStore}
 		/>
 	</div>
-	{#if !$collapsedState}
+	{#if !$finalCollapsedStore}
 		<div class="body" transition:slide={{ duration: 300 }} role="region" aria-labelledby={title}>
 			{#each subSections as subSection}
 				<RuleSubSectionBlock data={subSection} />

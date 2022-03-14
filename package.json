@@ -16,6 +16,7 @@
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
+		"@types/object-hash": "^2.2.1",
 		"@typescript-eslint/eslint-plugin": "^5.10.1",
 		"@typescript-eslint/parser": "^5.10.1",
 		"eslint": "^7.32.0",
@@ -35,6 +36,7 @@
 		"@mobily/ts-belt": "^3.9.1",
 		"@rgossiaux/svelte-headlessui": "^1.0.0-beta.12",
 		"less": "^4.1.2",
+		"object-hash": "^3.0.0",
 		"polished": "^4.1.4",
 		"svelte-local-storage-store": "^0.2.6"
 	}

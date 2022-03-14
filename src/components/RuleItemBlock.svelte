@@ -1,7 +1,10 @@
 <script lang="ts">
+	import { derived } from 'svelte/store';
+
 	import { onInteraction } from '../actions';
+	import searchStore from '../store/searchStore';
 	import type { RuleItem } from '../types';
-	import { compareStrings } from '../utils';
+	import { compareStrings, searchComparison } from '../utils';
 	import Modal from './Modal.svelte';
 
 	export let data: RuleItem;
@@ -16,9 +19,11 @@
 	//# Derived values
 	const iconSrc = `icons/${icon}.svg`;
 	const descriptionSubtitleDiff = compareStrings(subtitle, description, { caseSensitive: false });
+
+	const isVisibleStore = derived(searchStore, (search) => searchComparison(search, title));
 </script>
 
-<div class="root" use:onInteraction={toggleModal} tabIndex="0">
+<div class="root" use:onInteraction={toggleModal} tabIndex="0" class:hidden={!$isVisibleStore}>
 	<!-- <div class="darken" /> -->
 	<img src={iconSrc} alt={icon} class="icon" />
 	<div class="text">
@@ -34,7 +39,7 @@
 	{#if descriptionSubtitleDiff > 5}
 		<p class="description">{description}</p>
 	{/if}
-	{#each bullets as bullet}
+	{#each bullets as bullet (bullet)}
 		<p class="bullet">{@html bullet}</p>
 	{/each}
 	<div class="footer">
@@ -60,6 +65,10 @@
 		border-radius: @rounding;
 		padding: @gutter;
 		position: relative;
+
+		&.hidden {
+			display: none;
+		}
 
 		@media screen {
 			#desktop({

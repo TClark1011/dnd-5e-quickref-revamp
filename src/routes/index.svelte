@@ -3,15 +3,28 @@
 </script>
 
 <script lang="ts">
-	import { RuleSectionCard } from '../components';
-	import data from '../data';
-	import { sortData } from '../logic';
+	import { processedDataStore } from '../a';
+	import hash from 'object-hash';
 
-	$: sortedData = sortData(data);
+	import { Search } from '../components';
+	import RuleSectionCard from '../components/RuleSectionCard.svelte';
+	import type { RuleSection } from '../types';
+	import { sortData } from '../logic';
+	import data from '../data';
+
+	// const processedDataStore = createProcessedDataStore(data);
+	// const processedDataStore = derived(searchStore, (search) => filterData(data, search));
+
+	// let sections: readonly RuleSection[] = [];
+	// processedDataStore.subscribe((update) => {
+	// 	sections = update;
+	// });
+	const sortedData = sortData(data);
 </script>
 
 <div class="content">
-	{#each sortedData as section}
+	<Search />
+	{#each sortedData as section (section.title)}
 		<div class="item">
 			<RuleSectionCard data={section} />
 		</div>
