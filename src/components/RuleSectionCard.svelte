@@ -4,30 +4,49 @@
 	import { onInteraction } from '../actions';
 	import type { RuleSection } from '../types';
 	import { kebabCase, titleCase } from '../utils';
-	import { B } from '@mobily/ts-belt';
-	import { writable } from 'svelte-local-storage-store';
-	import { deriveIfSectionIsVisible, searchState } from '../store';
+	import { A, B, D } from '@mobily/ts-belt';
+	import { writable as localStorageWritable } from 'svelte-local-storage-store';
+	import {
+		type CardOptionsProps,
+		cardOptionsState,
+		deriveIfSectionIsVisible,
+		searchState,
+		toggleCardCollapsed
+	} from '../store';
 	import { derived } from 'svelte/store';
 	import ArrowIcon from '/static/icons/chevron-down.svg?component';
+	import { onMount } from 'svelte';
 
 	export let data: RuleSection;
 	let { title, subSections } = data;
 
-	let collapsedState = writable(`${title}-collapsed`, false);
-	const toggleCollapsed = () => collapsedState.update(B.not);
+	// const collapsedState = deriveIfCardIsCollapsed(title);
+	const optionsStatusState = localStorageWritable<CardOptionsProps>(`${title}-options`, {
+		title,
+		collapsed: false,
+		hidden: false
+	});
+	const toggleCollapsed = () => optionsStatusState.update(toggleCardCollapsed);
+	const matchesSearchState = deriveIfSectionIsVisible(data);
 
-	const isVisibleState = deriveIfSectionIsVisible(data);
+	onMount(() => {
+		// We add the store for this cards options to the list
+		// of card option stores
+		cardOptionsState.update(A.append(optionsStatusState));
+	});
 
 	const finalCollapsedState = derived(
-		[searchState, isVisibleState, collapsedState],
-		([$search, $isVisible, $collapsed]) => {
-			const isForcedOpen = $search && $isVisible;
-			return $collapsed && !isForcedOpen;
+		[searchState, matchesSearchState, optionsStatusState],
+		([$search, $matchesSearch, $collapsed]) => {
+			// Forced open if we match the current search
+			// and the current search is not empty
+			const isForcedOpen = $search && $matchesSearch;
+			return $collapsed.collapsed && !isForcedOpen;
 		}
 	);
 </script>
 
-{#if $isVisibleState}
+{#if $matchesSearchState && !$optionsStatusState.hidden}
 	<div
 		id={title}
 		class="root"

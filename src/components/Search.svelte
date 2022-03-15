@@ -42,7 +42,6 @@
 		@border: 1px solid @color;
 
 		width: 100%;
-		margin-bottom: @spacing * 2;
 
 		.search {
 			position: relative;

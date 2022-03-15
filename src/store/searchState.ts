@@ -25,7 +25,7 @@ export const deriveIfSubSectionIsVisible = (subSection: RuleSubSection) =>
 export const deriveIfSectionIsVisible = (section: RuleSection) =>
 	derived(searchState, ($search) => !!filterSection($search)(section).subSections.length);
 
-export const deriveSearchedData = (data: RuleSection[]) =>
+const deriveSearchedData = (data: RuleSection[]) =>
 	derived(searchState, ($search) => A.map(data, filterSection($search)));
 
 const countSubSectionItems = (subSection: RuleSubSection) =>

@@ -3,8 +3,7 @@
 </script>
 
 <script lang="ts">
-	import { RuleSectionCard } from '../components';
-	import Search from '../components/Search.svelte';
+	import { RuleSectionCard, Search, Options } from '../components';
 	import data from '../data';
 	import { sortData } from '../logic';
 
@@ -12,7 +11,10 @@
 </script>
 
 <div class="content">
-	<Search />
+	<div class="header">
+		<Search />
+		<Options />
+	</div>
 	{#each sortedData as section}
 		<div class="item">
 			<RuleSectionCard data={section} />
@@ -28,6 +30,13 @@
 		max-width: calc(100vw - (@spacing * 2));
 		height: 100%;
 		#axisProp(margin, y, @spacing);
+
+		.header {
+			display: flex;
+			align-items: center;
+			margin-bottom: @spacing * 2;
+			gap: @spacing;
+		}
 		.item {
 			#stack(y, @spacing * 2);
 		}

@@ -30,7 +30,6 @@
 		tabIndex="0"
 		transition:fade={{ duration: 100 }}
 	>
-		<!-- <div class="darken" /> -->
 		<img src={iconSrc} alt={icon} class="icon" />
 		<div class="text">
 			<h3>{title}</h3>
@@ -46,15 +45,12 @@
 	{#if descriptionSubtitleDiff > 5}
 		<p class="description">{description}</p>
 	{/if}
-	{#each bullets as bullet}
-		<p class="bullet">{@html bullet}</p>
-	{/each}
-	<div class="footer">
-		<button class="close" use:onInteraction={toggleModal}>Close</button>
-		{#if reference}
-			<div class="reference">{reference}</div>
-		{/if}
+	<div>
+		{#each bullets as bullet}
+			<p class="bullet">{@html bullet}</p>
+		{/each}
 	</div>
+	<div class="reference" slot="extra-footer">{reference}</div>
 </Modal>
 
 <style lang="less">
@@ -139,7 +135,6 @@
 
 	.description {
 		margin-bottom: @padding;
-		// font-style: italic;
 		padding: @spacing;
 		border-radius: @radius[md];
 	}
@@ -150,19 +145,12 @@
 		line-height: 1.4rem;
 
 		&:last-child {
-			padding-bottom: 0;
+			border-bottom: @border;
+			margin-bottom: @padding;
 		}
 	}
 
-	.footer {
-		border-top: @border;
-		padding-top: @padding;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-
-		.reference {
-			font-style: italic;
-		}
+	.reference {
+		font-style: italic;
 	}
 </style>

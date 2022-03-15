@@ -8,10 +8,21 @@
 	font-weight: normal;
 	background: none;
 	border: none;
+	list-style: none;
+	font-family: @fonts[body];
+}
+
+button,
+input[type='checkbox'] {
+	cursor: pointer;
+}
+
+li {
+	display: flex;
+	align-items: center;
 }
 
 button {
-	cursor: pointer;
 	font-weight: bold;
 	color: @colors[text];
 	padding: @spacing @spacing*2;
@@ -28,6 +39,10 @@ button {
 		background-color: @colors[text];
 		color: @colors[ @bg][main];
 	}
+
+	&.outlined {
+		border: 1px solid @colors[text];
+	}
 }
 
 html {
@@ -42,7 +57,6 @@ html {
 	});
 
 	color: @colors[text];
-	font-family: @fonts[body];
 
 	body {
 		background: @colors[ @bg][main];

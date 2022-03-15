@@ -65,8 +65,11 @@
 	gap: @gap;
 }
 
-#tintedBackground(@opacity) {
+#tintedBackground(@opacity, @lightModeOpacity: @opacity) {
 	background-color: rgba(0, 0, 0, @opacity);
+	#lightMode({
+		background-color: rgba(0, 0, 0, @lightModeOpacity);
+	});
 }
 
 #stack(@direction, @amount, @property: margin) {
