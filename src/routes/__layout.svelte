@@ -21,7 +21,6 @@
 	<meta property="og:image" content="thumbnail.png" />
 </svelte:head>
 <div id="root">
-	<div id="force-center" class="offset" />
 	<slot />
 	<footer class="offset">
 		<p>
@@ -43,15 +42,6 @@
 
 		.offset {
 			height: 4rem;
-		}
-
-		#force-center {
-			@media print {
-				display: none;
-			}
-			#phone({
-				display: none;
-			});
 		}
 
 		footer {

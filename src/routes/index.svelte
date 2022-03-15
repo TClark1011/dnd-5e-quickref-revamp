@@ -4,6 +4,7 @@
 
 <script lang="ts">
 	import { RuleSectionCard } from '../components';
+	import Search from '../components/Search.svelte';
 	import data from '../data';
 	import { sortData } from '../logic';
 
@@ -11,6 +12,7 @@
 </script>
 
 <div class="content">
+	<Search />
 	{#each sortedData as section}
 		<div class="item">
 			<RuleSectionCard data={section} />

@@ -1,19 +1,24 @@
 <script lang="ts">
+	import { deriveIfSubSectionIsVisible } from '../store';
 	import type { RuleSubSection } from '../types';
 	import RuleItemBlock from './RuleItemBlock.svelte';
 
 	export let data: RuleSubSection;
 	let { description, items } = data;
+
+	const isVisibleState = deriveIfSubSectionIsVisible(data);
 </script>
 
-<div class="root">
-	<p class="description">{description}</p>
-	<div class="items">
-		{#each items as rule}
-			<RuleItemBlock data={rule} />
-		{/each}
+{#if $isVisibleState}
+	<div class="root">
+		<p class="description">{description}</p>
+		<div class="items">
+			{#each items as rule}
+				<RuleItemBlock data={rule} />
+			{/each}
+		</div>
 	</div>
-</div>
+{/if}
 
 <style lang="less">
 	@import '../styles/index.less';

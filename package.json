@@ -14,6 +14,7 @@
 		"manifest": "pwa-asset-generator static/favicon.png static/pwa --manifest static/manifest.json --path-override pwa --opaque false --background \"rgb(21, 19, 27)\""
 	},
 	"devDependencies": {
+		"@poppanator/sveltekit-svg": "^0.3.1",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
 		"@typescript-eslint/eslint-plugin": "^5.10.1",

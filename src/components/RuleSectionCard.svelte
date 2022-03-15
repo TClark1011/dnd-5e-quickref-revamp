@@ -1,46 +1,64 @@
 <script lang="ts">
-	import { slide } from 'svelte/transition';
-
+	import { fade, slide } from 'svelte/transition';
 	import { RuleSubSectionBlock } from '.';
 	import { onInteraction } from '../actions';
 	import type { RuleSection } from '../types';
 	import { kebabCase, titleCase } from '../utils';
 	import { B } from '@mobily/ts-belt';
 	import { writable } from 'svelte-local-storage-store';
+	import { deriveIfSectionIsVisible, searchState } from '../store';
+	import { derived } from 'svelte/store';
+	import ArrowIcon from '/static/icons/chevron-down.svg?component';
 
 	export let data: RuleSection;
 	let { title, subSections } = data;
 
 	let collapsedState = writable(`${title}-collapsed`, false);
 	const toggleCollapsed = () => collapsedState.update(B.not);
+
+	const isVisibleState = deriveIfSectionIsVisible(data);
+
+	const finalCollapsedState = derived(
+		[searchState, isVisibleState, collapsedState],
+		([$search, $isVisible, $collapsed]) => {
+			const isForcedOpen = $search && $isVisible;
+			return $collapsed && !isForcedOpen;
+		}
+	);
 </script>
 
-<div id={title} class="root" style="--section-color: var(--section-color-{kebabCase(title)})">
+{#if $isVisibleState}
 	<div
-		role="button"
-		class="title"
-		use:onInteraction={toggleCollapsed}
-		class:collapsed={$collapsedState}
-		tabIndex="0"
-		aria-controls={title}
-		aria-expanded={!$collapsedState}
+		id={title}
+		class="root"
+		style="--section-color: var(--section-color-{kebabCase(title)})"
+		transition:fade={{ duration: 200 }}
 	>
-		<h2>{titleCase(title)}</h2>
-		<img
-			src={'icons/chevron-down.svg'}
-			alt="arrow"
-			class="arrow"
-			class:collapsed={$collapsedState}
-		/>
-	</div>
-	{#if !$collapsedState}
-		<div class="body" transition:slide={{ duration: 300 }} role="region" aria-labelledby={title}>
-			{#each subSections as subSection}
-				<RuleSubSectionBlock data={subSection} />
-			{/each}
+		<div
+			role="button"
+			class="title"
+			use:onInteraction={toggleCollapsed}
+			class:collapsed={$finalCollapsedState}
+			tabIndex="0"
+			aria-controls={title}
+			aria-expanded={!$finalCollapsedState}
+		>
+			<h2>{titleCase(title)}</h2>
+			{#if !$searchState}
+				<div class="arrow-wrapper" class:collapsed={$finalCollapsedState}>
+					<ArrowIcon />
+				</div>
+			{/if}
 		</div>
-	{/if}
-</div>
+		{#if !$finalCollapsedState}
+			<div class="body" transition:slide={{ duration: 300 }} role="region" aria-labelledby={title}>
+				{#each subSections as subSection}
+					<RuleSubSectionBlock data={subSection} />
+				{/each}
+			</div>
+		{/if}
+	</div>
+{/if}
 
 <style lang="less">
 	@import '../styles/index.less';
@@ -78,7 +96,7 @@
 				transition-delay: 150ms;
 			}
 
-			.arrow {
+			.arrow-wrapper {
 				transform: rotateZ(0deg);
 				transition: transform 300ms linear;
 

@@ -1,5 +1,8 @@
 <script lang="ts">
+	import { fade } from 'svelte/transition';
+
 	import { onInteraction } from '../actions';
+	import { deriveIfRuleIsVisible } from '../store';
 	import type { RuleItem } from '../types';
 	import { compareStrings } from '../utils';
 	import Modal from './Modal.svelte';
@@ -16,18 +19,27 @@
 	//# Derived values
 	const iconSrc = `icons/${icon}.svg`;
 	const descriptionSubtitleDiff = compareStrings(subtitle, description, { caseSensitive: false });
+
+	const isVisibleState = deriveIfRuleIsVisible(data);
 </script>
 
-<div class="root" use:onInteraction={toggleModal} tabIndex="0">
-	<!-- <div class="darken" /> -->
-	<img src={iconSrc} alt={icon} class="icon" />
-	<div class="text">
-		<h3>{title}</h3>
-		<p class="subtitle">
-			{subtitle}
-		</p>
+{#if $isVisibleState}
+	<div
+		class="root"
+		use:onInteraction={toggleModal}
+		tabIndex="0"
+		transition:fade={{ duration: 100 }}
+	>
+		<!-- <div class="darken" /> -->
+		<img src={iconSrc} alt={icon} class="icon" />
+		<div class="text">
+			<h3>{title}</h3>
+			<p class="subtitle">
+				{subtitle}
+			</p>
+		</div>
 	</div>
-</div>
+{/if}
 
 <Modal bind:isOpen={modalIsOpen} {title} {subtitle}>
 	<img src={iconSrc} alt={icon} class="icon modal" slot="icon" />
