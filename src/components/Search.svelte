@@ -14,7 +14,6 @@
 
 	const clearSearch = () => {
 		value = '';
-		searchInputEl?.focus();
 	};
 
 	$: {
