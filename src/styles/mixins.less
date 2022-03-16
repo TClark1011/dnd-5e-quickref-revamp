@@ -106,3 +106,12 @@
 		#stack(@direction, @amount);
 	}
 }
+
+#scopeWrapper(@class, @rules, @wrapperRules: {}) {
+	.@{class}-wrapper {
+		@wrapperRules();
+		& > :global(.@{class}) {
+			@rules();
+		}
+	}
+}

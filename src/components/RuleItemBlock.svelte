@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { InfoIcon } from 'svelte-feather-icons';
 	import { fade } from 'svelte/transition';
 
 	import { onInteraction } from '../actions';
@@ -32,7 +33,12 @@
 	>
 		<img src={iconSrc} alt={icon} class="icon" />
 		<div class="text">
-			<h3>{title}</h3>
+			<div class="head">
+				<h3>{title}</h3>
+				<div class="info-wrapper">
+					<InfoIcon class="info" />
+				</div>
+			</div>
 			<p class="subtitle">
 				{subtitle}
 			</p>
@@ -91,11 +97,24 @@
 		});
 
 		.text {
-			h3 {
-				font-weight: bold;
-			}
+			width: 100%;
 			* {
 				line-height: @contentLineHeight;
+			}
+
+			.head {
+				display: flex;
+				justify-content: space-between;
+				width: 100%;
+				#gap(x, @spacing * 0.5);
+				h3 {
+					font-weight: bold;
+				}
+
+				#scopeWrapper(info, {
+					#size(@fontSize[lg]);
+					opacity: 0.6;
+				});
 			}
 		}
 	}
