@@ -4,35 +4,21 @@
 	import { onInteraction } from '../actions';
 	import type { RuleSection } from '../types';
 	import { kebabCase, titleCase } from '../utils';
-	import { writable as localStorageWritable } from 'svelte-local-storage-store';
-	import {
-		type CardOptionsProps,
-		deriveIfSectionIsVisible,
-		searchState,
-		toggleCardCollapsed,
-		registerNewCardOptionStore
-	} from '../store';
+	import { deriveIfSectionIsVisible, searchState, createNewCardOptionStore } from '../store';
 	import { derived } from 'svelte/store';
 	import ArrowIcon from '/static/icons/chevron-down.svg?component';
-	import { onMount } from 'svelte';
+	import { toggleCardCollapsed } from '../logic';
 
 	export let data: RuleSection;
 	let { title, subSections } = data;
 
-	// const collapsedState = deriveIfCardIsCollapsed(title);
-	const optionsStatusState = localStorageWritable<CardOptionsProps>(`${title}-options`, {
+	const optionsStatusState = createNewCardOptionStore({
 		title,
 		collapsed: false,
 		hidden: false
 	});
 	const toggleCollapsed = () => optionsStatusState.update(toggleCardCollapsed);
 	const matchesSearchState = deriveIfSectionIsVisible(data);
-
-	onMount(() => {
-		// We add the store for this cards options to the list
-		// of card option stores
-		registerNewCardOptionStore(optionsStatusState);
-	});
 
 	const finalCollapsedState = derived(
 		[searchState, matchesSearchState, optionsStatusState],

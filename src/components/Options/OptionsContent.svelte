@@ -5,17 +5,18 @@
 	import {
 		cardOptionsState,
 		getAllCardOptions,
-		toggleCardHidden,
-		updateAllCardOptions,
-		updateSpecificStore,
+		updateCardOptionStores,
+		updateCardOptionStoreWithTitle,
 		type CardOptionsProps
 	} from '../../store';
 	import { titleCase, subscribeToStoreArray } from '../../utils';
+	import { toggleCardHidden } from '../../logic';
 
 	const setAllCollapsed = (newState: boolean) =>
-		updateAllCardOptions(D.update('collapsed', F.always(newState)));
+		updateCardOptionStores(D.update('collapsed', F.always(newState)));
 
-	const toggleSpecificStoreHidden = (title: string) => updateSpecificStore(title, toggleCardHidden);
+	const toggleSpecificStoreHidden = (title: string) =>
+		updateCardOptionStoreWithTitle(title, toggleCardHidden);
 
 	// Will hold all of the card options values
 	let options: CardOptionsProps[] = [];
@@ -27,7 +28,7 @@
 		() => {
 			// Everytime one of the sub-stores is updated
 			// we update the local options variable
-			options = getAllCardOptions();
+			options = getAllCardOptions() as CardOptionsProps[];
 		},
 		D.get('title')
 	);
