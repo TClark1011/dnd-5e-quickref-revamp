@@ -4,14 +4,13 @@
 	import { onInteraction } from '../actions';
 	import type { RuleSection } from '../types';
 	import { kebabCase, titleCase } from '../utils';
-	import { A, B, D } from '@mobily/ts-belt';
 	import { writable as localStorageWritable } from 'svelte-local-storage-store';
 	import {
 		type CardOptionsProps,
-		cardOptionsState,
 		deriveIfSectionIsVisible,
 		searchState,
-		toggleCardCollapsed
+		toggleCardCollapsed,
+		registerNewCardOptionStore
 	} from '../store';
 	import { derived } from 'svelte/store';
 	import ArrowIcon from '/static/icons/chevron-down.svg?component';
@@ -32,7 +31,7 @@
 	onMount(() => {
 		// We add the store for this cards options to the list
 		// of card option stores
-		cardOptionsState.update(A.append(optionsStatusState));
+		registerNewCardOptionStore(optionsStatusState);
 	});
 
 	const finalCollapsedState = derived(
