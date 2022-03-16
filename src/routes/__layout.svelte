@@ -10,9 +10,6 @@
 	const title = '5e Quick Reference';
 </script>
 
-{@html lightModeStyles}
-{@html darkModeStyles}
-
 <svelte:head>
 	<title>{title}</title>
 	<meta property="og:title" content={title} />
@@ -20,6 +17,10 @@
 	<meta property="og:url" content={$page.url.toString()} />
 	<meta property="og:image" content="thumbnail.png" />
 </svelte:head>
+
+{@html lightModeStyles}
+{@html darkModeStyles}
+
 <div id="root">
 	<slot />
 	<footer class="offset">
@@ -39,6 +40,7 @@
 		flex-direction: column;
 		justify-content: space-between;
 		min-height: 100vh;
+		align-items: center;
 
 		.offset {
 			height: 4rem;

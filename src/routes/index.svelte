@@ -35,7 +35,7 @@
 			display: flex;
 			align-items: center;
 			margin-bottom: @spacing * 2;
-			gap: @spacing;
+			#gap(x, @spacing);
 		}
 		.item {
 			#stack(y, @spacing * 2);

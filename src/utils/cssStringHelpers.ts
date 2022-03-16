@@ -5,4 +5,4 @@ export const wrapCssStringWithDarkModePref = (css: string) => `
 
 export const wrapWithStyleTags = (css: string) => `<style>${css}</style>`;
 
-export const wrapWithRootSelector = (styles: string) => `#root { ${styles} }`;
+export const wrapWithRootSelector = (styles: string) => `html { ${styles} }`;

@@ -73,13 +73,11 @@
 }
 
 #stack(@direction, @amount, @property: margin) {
-	& when (@direction = y) {
-		&:not(:last-child) {
+	&:not(:last-child) {
+		& when (@direction = y) {
 			@{property}-bottom: @amount;
 		}
-	}
-	& when (@direction = x) {
-		&:not(:last-child) {
+		& when (@direction = x) {
 			@{property}-right: @amount;
 		}
 	}
@@ -101,4 +99,10 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+#gap(@direction, @amount) {
+	& > :global(*) {
+		#stack(@direction, @amount);
+	}
 }

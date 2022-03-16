@@ -30,12 +30,12 @@
 	@import '../../styles/index.less';
 
 	:global(.icon-wrapper) {
-		// padding: @spacing;
+		padding: 0;
 		#flexCenter;
 	}
 
 	:global(.icon) {
-		height: 1.8rem;
+		#size(1.8rem);
 		margin: @spacing;
 		#flexCenter();
 	}

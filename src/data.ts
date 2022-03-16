@@ -590,7 +590,7 @@ const data: RuleSection[] = [
 		subSections: [
 			{
 				description:
-					'You can move at any time during your turn (before, after, or during actions).',
+					'You can also interact with one object or feature of the environment for free.',
 				items: [
 					{
 						title: 'Attack',

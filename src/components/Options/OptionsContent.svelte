@@ -71,7 +71,7 @@
 			width: max-content;
 			min-width: 100%;
 			display: flex;
-			gap: @spacing;
+			#gap(x, @spacing);
 			button {
 				flex-grow: 1;
 				padding: @spacing*0.5, @spacing;
@@ -87,7 +87,7 @@
 				justify-content: space-between;
 				#stack(y, @spacing);
 				padding: @spacing;
-				#tintedBackground(0.2, 0.1);
+				#tintedBackground(0.2, 0.05);
 				border-radius: @radius[base];
 				cursor: pointer;
 

@@ -12,7 +12,11 @@
 	export let hideCloseButton = false;
 
 	let bodyRef: HTMLElement;
+
+	let height: number;
 </script>
+
+<svelte:window bind:innerHeight={height} />
 
 <Dialog
 	open={isOpen}
@@ -21,9 +25,10 @@
 	}}
 	class="Modal__modal"
 	initialFocus={bodyRef}
+	style={`max-height: ${height}px;`}
 >
 	<DialogOverlay class="overlay" />
-	<div class="body" bind:this={bodyRef}>
+	<div class="body" bind:this={bodyRef} style:max-height={`${height}px`}>
 		{#if $$slots.icon || title || subtitle}
 			<div class="head">
 				{#if title || subtitle}
@@ -62,7 +67,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		min-height: 100vh;
+		height: 100vh;
 
 		:global(.overlay) {
 			position: fixed;

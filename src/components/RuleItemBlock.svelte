@@ -63,7 +63,7 @@
 		@rounding: @radius[md];
 
 		display: flex;
-		gap: 4px;
+		#gap(x, @spacing * 0.5);
 		cursor: pointer;
 		border-radius: @rounding;
 		padding: @gutter;
