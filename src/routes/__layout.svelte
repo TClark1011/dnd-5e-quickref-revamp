@@ -4,6 +4,7 @@
 	import data from '../data';
 	import { generateSectionColorCss } from '../logic';
 	import { page } from '$app/stores';
+	import { SetupHeightCSSVar } from '../components';
 
 	const { lightModeStyles, darkModeStyles } = generateSectionColorCss(data);
 
@@ -21,6 +22,7 @@
 {@html lightModeStyles}
 {@html darkModeStyles}
 
+<SetupHeightCSSVar />
 <div id="root">
 	<slot />
 	<footer class="offset">

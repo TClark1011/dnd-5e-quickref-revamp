@@ -4,3 +4,4 @@ export { default as RuleSubSectionBlock } from './RuleSubSectionBlock.svelte';
 export { default as Search } from './Search.svelte';
 export { default as Options } from './Options';
 export { default as DeviceSpecific } from './DeviceSpecific.svelte';
+export { default as SetupHeightCSSVar } from './SetupHeightCSSVar.svelte';
