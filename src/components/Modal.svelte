@@ -65,7 +65,7 @@
 		height: 100vh;
 		max-height: var(--client-height);
 
-		:global(.overlay) {
+		& > :global(.overlay) {
 			position: fixed;
 			#inset(0);
 			background: black;
@@ -89,14 +89,16 @@
 				display: flex;
 				justify-content: space-between;
 
-				:global(.title) {
-					font-weight: 600;
-					font-size: @fontSize[xl];
-					margin-bottom: @spacing;
-				}
+				.text {
+					& > :global(.title) {
+						font-weight: 600;
+						font-size: @fontSize[xl];
+						margin-bottom: @spacing;
+					}
 
-				:global(.description) {
-					font-style: italic;
+					& > :global(.description) {
+						font-style: italic;
+					}
 				}
 			}
 		}

@@ -9,7 +9,7 @@
 	import Modal from './Modal.svelte';
 
 	export let data: RuleItem;
-	let { title, subtitle, bullets, icon, reference, description } = data;
+	let { title, subtitle, bullets, icon, reference = '', description } = data;
 
 	let modalIsOpen = false;
 
@@ -27,8 +27,8 @@
 {#if $isVisibleState}
 	<div
 		class="root"
+		role="button"
 		use:onInteraction={toggleModal}
-		tabIndex="0"
 		transition:fade={{ duration: 100 }}
 	>
 		<img src={iconSrc} alt={icon} class="icon" />
